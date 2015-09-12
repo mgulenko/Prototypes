@@ -10,8 +10,8 @@ package com.brightlightsystems.core.utilities.definitions;
  * This class is designed to simulate MultiMap behaviour. Essentially it is a wrapper around HashMap
  * with a Key to a HashSet of objects. NOTE: This class DOES NOT implement Map interface.
  * Use this class whenever you need to associate multiple values with a single key.
- * K - the type of keys
- * V - the type of associated values. Can be more than 1 per key.
+ * K - the type of keys. Can be mapped to multiple values.
+ * V - the type of associated values.
  * @author Michael Gulenko. Created on 09/06/2015
  */
 @SuppressWarnings( {"unused"})
@@ -47,7 +47,7 @@ public class MultiMap<K,V>
     }
 
     /**
-     * Tests if the map maps one or more keys to the specified set.
+     * Tests if the map maps one or more keys to the specified set of values.
      * @param v - set, presence of which to be tested
      * @return - true if the map maps specified set. false otherwise.
      */
@@ -57,7 +57,7 @@ public class MultiMap<K,V>
     }
 
     /**
-     * Tests if the map has associated to the key value
+     * Tests if the map has associated to the specified  key a specified value
      * @param k - key that is used to test an association of specified value
      * @param v - value association of which needs to be tested
      * @return - true if specified value is associated to the specified key. false otherwise.
@@ -155,7 +155,7 @@ public class MultiMap<K,V>
     }
 
     /**
-     * Map specified set of values with specified key. If the specified key already has
+     * Maps specified set of values with specified key. If the specified key already has
      * mapped set, then method will combine those 2 sets removing duplicated values.
      *
      * @param k - key with which the specified set is to be associated with.
@@ -194,11 +194,11 @@ public class MultiMap<K,V>
     }
 
     /**
-     * Removes  mapping from specified key.
+     * Removes all values from specified key.
      * @param k - key which mapping is needs to be removed.
-     * @return - removed value or null if there were no mapping
+     * @return - a set representation of removed values or null if there were no mapping
      */
-    public Set<V> remove(K k)
+    public Set<V> removeAll(K k)
     {
         return _map.remove(k);
     }
@@ -209,7 +209,7 @@ public class MultiMap<K,V>
      * @param v - values that is to be removed from the set of associated values for specified key.
      * @return - returns true on success, false otherwise.
      */
-    public boolean dissociate(K k, V v)
+    public boolean remove(K k, V v)
     {
         assert(_map.get(k) != null);
         return _map.get(k).remove(v);
@@ -269,5 +269,5 @@ public class MultiMap<K,V>
 
     /******************** end of class********************************/
 
-};
+}
 

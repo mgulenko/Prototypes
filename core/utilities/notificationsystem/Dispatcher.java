@@ -10,7 +10,7 @@ import com.brightlightsystems.core.utilities.definitions.MultiMap;
 class Dispatcher
 {
     /**
-     * Holds list subscribers that are subscribed to a particular message
+     * Holds a list of subscribers that are subscribed to a particular message
      * Key can't be < 1, value can't be null.
      * Actual map can be empty.
      */
@@ -64,7 +64,7 @@ class Dispatcher
     {
         if(messageId < 0 || subscriber == null)
             throw new IllegalArgumentException();
-        return _subscribers.dissociate(messageId,subscriber);
+        return _subscribers.remove(messageId,subscriber);
     }
 
     /**
